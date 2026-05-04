@@ -2,7 +2,7 @@ package com.springcoding.internalWorkingOfSpringBoot;
 
 import org.springframework.stereotype.Component;
 
-@Component
+// @Component - to make this class a spring bean and to be managed by spring container
 public class PhonePayPaymentService implements PaymentService {
 
     @Override
