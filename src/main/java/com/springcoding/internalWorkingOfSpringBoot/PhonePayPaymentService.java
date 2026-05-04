@@ -3,9 +3,10 @@ package com.springcoding.internalWorkingOfSpringBoot;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PhonePayPaymentService{
+public class PhonePayPaymentService implements PaymentService {
 
-    public String phonePayPayment(){
+    @Override
+    public String pay(){
         System.out.println("Payment from PhonePay Payment Service");
         return "Payment from PhonePay Payment Service";
     }

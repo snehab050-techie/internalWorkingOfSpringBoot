@@ -17,18 +17,18 @@ public class InternalWorkingOfSpringBootApplication implements CommandLineRunner
 	// private PhonePayPaymentService phonePayPaymentService = new PhonePayPaymentService();
 
 	// @Autowired - field injection - spring will automatically inject the dependency
-	private PhonePayPaymentService phonePayPaymentService;
+	private final PaymentService paymentsService;
 
 	// DI - through constructor injection
-	public InternalWorkingOfSpringBootApplication(PhonePayPaymentService phonePayPaymentService) {
-		this.phonePayPaymentService = phonePayPaymentService;
+	public InternalWorkingOfSpringBootApplication(PaymentService paymentService) {
+		this.paymentsService = paymentService;
 	}
 
 
 	@Override
 	public void run(String... args) throws Exception {
-		phonePayPaymentService.phonePayPayment();
-		System.out.println("Payment done using phone pay payment service");
+		String payment = paymentsService.pay();
+		System.out.println("Payment done using: " +payment);
 
 	}
 
