@@ -178,3 +178,19 @@ The easiest way to remember it is: @Controller -> return a page, @RestController
 
 Why do we use @RestController?: We use @RestController to create REST APIs that handle HTTP requests and return data, usually JSON,
                                 directly in the HTTP response. It is convenient because it combines @Controller and @ResponseBody.
+
+REST API Picture
+-----------------
+
+GET     /employees              -> Get all employees
+GET     /employees/101          -> Get employee 101
+POST    /employees              -> Create employee
+PUT     /employees/101          -> Update employee 101
+DELETE  /employees/101          -> Delete employee 101
+
+HTTP Method       Purpose
+
+GET               Read
+POST              Create
+PUT               Update
+DELETE            Delete
