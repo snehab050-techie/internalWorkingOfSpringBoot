@@ -1,0 +1,111 @@
+Dependency Injection
+----------------------
+Dependency Injection (DI) in Spring is a design pattern where an external container manages and provides
+the required dependencies of a class, instead of the class creating them internally.
+
+It is a concrete implementation of Inversion of Control (IoC), meaning the control of object creation and
+lifecycle management is shifted from the developer's manual code to the Spring Framework.
+
+The Core Problem and the DI Solution
+---------------------------------------
+In standard Java, if a Car class needs an Engine, we typically use the new keyword inside the Car class:
+
+public class Car{
+    private Engine engine = new Engine(); //Tightly coupled
+}
+
+This causes tight coupling; if the Engine constructor changes, the Car class breaks.
+
+With Spring DI, the Car class simply declares that it needs an Engine, and the Spring IoC Container automatically
+supplies (injects) that Engine instance at runtime:
+
+@Component
+public class Car{
+
+    private final Engine engine;
+
+    //Spring automatically injects the Engine bean here
+    public Car(Engine engine){
+        this.engine = engine;
+    }
+}
+
+Note: IoC is the broader principle where control of object creation and management is transferred to the Spring Container.
+      Dependency Injection is the mechanism through which Spring provides the required dependencies to objects.
+
+3 Main Types of Dependency Injection
+-------------------------------------
+
+Spring supports three primary variants to inject dependencies into a class:
+
+1. Constructor Injection (Recommended)
+
+    Dependencies are provided through the class constructor.
+    This is the industry-standard choice because it ensures required dependencies are never null and allows fields
+    to be marked as final (promoting immutability).
+
+Example 1:
+
+@Service
+public class EmployeeService{
+
+    private final EmployeeRepository empRepo;
+
+    //@Autowired annotation is optional is the class has only one constructor
+    public EmployeeService(EmployeeRepository eRepo){
+        this.empRepo = eRepo;
+    }
+
+}
+
+Example 2:
+
+@Component
+public class OrderService{
+
+    private final PaymentService;
+
+    //@Autowired annotation is optional is the class has only one constructor
+    public OrderService(PaymentService ps){
+        this.PaymentService = ps;
+    }
+}
+
+2. Setter Injection
+
+    Dependencies are supplied through public setter methods.
+    This approach is ideal for optional or modifiable dependencies that can be changed or assigned later.
+
+Example:
+
+@Component
+public class OrderService{
+
+    private PaymentProcessor paymentProcessor;
+
+    @Autowired
+    public void setPaymentProcessor(PaymentProcessor paymentProcessor){
+        this.paymentProcessor = paymentProcessor;
+    }
+}
+
+3. Field Injection
+
+    Dependencies are injected directly into the fields using reflection by placing the @Autowired annotation right on the variable.
+    While convenient and brief, it is generally discouraged because it hides dependencies and makes unit testing
+    outside of a Spring container difficult.
+
+Example:
+
+@Component
+public class EmployeeService{
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
+}
+
+The difference between Dependency Injection and IoC container
+--------------------------------------------------------------
+
+IoC is the broader principle where control of object creation and management is transferred to the Spring Container.
+Dependency Injection is the mechanism through which Spring provides the required dependencies to objects.
