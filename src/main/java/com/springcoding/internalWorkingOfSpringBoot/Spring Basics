@@ -109,3 +109,75 @@ The difference between Dependency Injection and IoC container
 
 IoC is the broader principle where control of object creation and management is transferred to the Spring Container.
 Dependency Injection is the mechanism through which Spring provides the required dependencies to objects.
+
+Note: Constructor injection is generally preferred because dependencies are explicit,
+      required dependencies can be made final, and the class is easier to test.
+
+      @Autowired tells Spring where a dependency needs to be injected.
+      OR It tells Spring to inject a suitable dependency into a constructor, field, or setter.
+
+@Component,@Controller, @RestController, @Service, @Repository
+----------------------------------------------------------------
+
+These are all ways of telling Spring:
+"This class should be managed as a Spring bean."
+
+@Component: A generic Spring-managed component
+@Controller: Used for Spring MVC controllers
+@RestController: Commonly used for REST APIs
+@Service: Typically used for business logic
+@Repository: Used for data-access classes
+
+What happens when a spring-boot application starts?
+--------------------------------------------------
+When the Spring Boot application starts, SpringApplication.run() creates and initializes the
+Spring ApplicationContext.
+
+Through component scanning, Spring discovers classes annotated with components such as @Service, @Repository, and @Controller
+and registers them as beans.
+
+Spring then creates and configures those beans and resolves their dependencies through Dependency Injection.
+
+Auto-configuration configures the required Spring infrastructure based on the application's dependencies.
+Once the context is initialized, the application is ready to handle requests
+
+@SpringBootApplication
+        |
+Spring Boot starts
+        |
+ApplicationContext
+        |
+Component Scanning
+        |
+Find @Service / @Repository / @Controller
+        |
+Register Beans
+        |
+Create Beans
+        |
+Resolve Dependencies
+        |
+Dependency Injection
+        |
+Application Ready
+
+The difference between @Controller and @RestController
+-------------------------------------------------------
+
+@Controller and @RestController are used to handle HTTP requests in a Spring application.
+The main difference is what we want to return to the client.
+@Controller is mainly used when we want to return a web page or view, like an HTML page.
+For example, if a user requests /employees, the controller can return an employees.html page.
+On the other hand, @RestController is mainly used for building REST APIs, where we want to return data, usually in JSON format,
+instead of a web page. For example, if we call /employees, it can return a list of employees as JSON.
+@RestController is basically a combination of @Controller and @ResponseBody. @ResponseBody tells Spring to put the returned Java object
+directly into the HTTP response, and Spring converts it into JSON. So, in a Spring Boot microservices application, we generally use
+@RestController because our services communicate through REST APIs and exchange JSON data.
+
+The easiest way to remember it is: @Controller -> return a page, @RestController -> return data/JSON.
+
+Why do we use @RestController?: We use @RestController to create REST APIs that handle HTTP requests and return data, usually JSON,
+                                directly in the HTTP response. It is convenient because it combines @Controller and @ResponseBody.
+
+
+
