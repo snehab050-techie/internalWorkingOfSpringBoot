@@ -194,3 +194,171 @@ GET               Read
 POST              Create
 PUT               Update
 DELETE            Delete
+
+1. @RequestMapping - A general purpose mapping annotation which is used at the class level
+                  It avoids repeating the common URL.
+
+Example: Without it
+         @GetMapping("/employees")
+         @PostMapping("/employees")
+         @DeleteMapping("/employees/{id}")
+
+         With it
+         @RestController
+         @RequestMapping("/employees")
+         public class EmployeeController{
+            @GetMapping
+            @PostMapping
+            @DeleteMapping("/{id}")
+         }
+
+         Much cleaner code
+
+2. @GetMapping - Used when we want to handle an HTTP GET request
+
+                 @GeMapping - maps an HTTP GET request to a controller method. It is a shortcut for
+                 @RequestMapping(method = RequestMethod.GET)
+
+Example:
+        @GetMapping("/employees")
+        public List<Employee> getEmployees(){
+            return employeeService.getAllEmployees();
+        }
+
+3. @PostMapping
+
+   Used for creating a resource.
+
+   @PostMapping
+   public Employee createEmployee(@RequestBody Employee employee) {
+       return employeeService.createEmployee(employee);
+   }
+
+   The client might send: JSON
+
+   {
+       "name": "Sneha",
+       "department": "IT",
+       "salary": 70000
+   }
+
+   Request:
+
+   POST /employees
+
+4. @RequestBody - tells Spring that "take the data from the HTTP request body and convert into this Java object"
+
+    Example:
+
+        @PostMapping
+        public void creatEmployee(@RequestBody Employee employee){
+            employeeService.creatEmployee(employee);
+        }
+
+        Client sends: JSON
+
+        {
+            "name": "Sneha",
+            "department": "IT"
+        }
+
+        Spring converts it roughly like:
+
+        JSON
+         | to
+        Employee object
+
+        So inside your method:
+        employee.getName()
+        gives:
+        Sneha
+
+Note: RequestBody = data coming inside the request body.
+
+      Usually used with:
+        POST
+        PUT
+        PATCH
+
+5. @PathVariable - Used to bind values from HTTP request URL to the Argument in the method signature
+
+Example:
+
+    URL: /employees/101
+
+    @GetMapping("/{id}")
+    public Employee getEmployeeWithId(@PathVariable Long id){
+        return employeeService.getEmployeeWithId(id);
+    }
+
+    Here Spring extracts id - 101 and gives it to Long id. So now id = 101
+
+6. @RequestParam - extracts a query parameter, such as /employees?department=IT
+
+Example:  GET /employees?department=IT
+          here
+          department=IT is the query parameter
+
+          @GetMapping
+          public List<Employee> getEmployeesByDept(@RequestParam String department){
+            return employeeService.getAllEmployeesWithDept(department);
+          }
+
+          Request: GET /employees?department=IT
+
+          Spring gives: department="IT"
+
+Difference between the @PathVariable and @RequestMapping
+---------------------------------------------------------
+
+    @PathVariable
+
+    Value is part of the URL path:
+
+    /employees/101
+    @PathVariable Long id
+
+    Used when identifying a specific resource.
+
+    @RequestParam
+
+    Value comes after ?
+
+    /employees?department=IT
+    @RequestParam String department
+
+    Used commonly for filtering, searching, sorting, pagination, etc.
+
+7. @PutMapping - Used for Updating a Resource
+
+Example:
+        Request - PUT /employees/101
+
+        JSON - {
+                    "name": "Sneha",
+                    "dept": "ME",
+                    "salary": 80000
+                }
+
+          @PutMapping
+          public Employee updateEmployeeById(@PathVariable Long id, @RequestBody Employee employee){
+                return employeeService.updateEmployeeById(id,employee);
+          }
+
+We are using two annotations together here:
+          @PathVariable
+          @RequestBody
+
+          Because: 101 -> @PathVariable and Employee JSON -> @RequestBody
+
+8. @DeleteMapping - Used to delete a resource
+
+Example: Request: DELETE /employees/101
+
+        @DeleteMapping
+        public void deleteEmpById(@PathVariable Long id){
+            employeeService.deleteEmpById(id);
+        }
+
+        Spring extracts: 101
+        using @PathVariable
