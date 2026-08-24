@@ -507,3 +507,36 @@ Java object
 HTTP response
 
 So they work in opposite directions.
+
+In @RequestBody
+
+Client sends:
+
+{
+    "name": "Sneha",
+    "department": "IT",
+    "salary": 70000
+}
+
+Spring converts this JSON to:
+
+JSON
+ |
+Employee Java object
+
+That's:
+
+@RequestBody Employee employee
+
+In @ResponseBody
+
+Out controller returns Java Object:
+Employee employee
+
+Spring converts:
+
+Employee Java object
+ |
+JSON
+
+That's @ResponseBody.
