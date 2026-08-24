@@ -362,3 +362,42 @@ Example: Request: DELETE /employees/101
 
         Spring extracts: 101
         using @PathVariable
+
+One important thing about @RequestMapping
+-------------------------------------------
+
+We can actually use @RequestMapping instead of a specialized annotations
+
+For example:
+
+@RequestMapping(
+    value="{/id}",
+    method=RequestMethod.GET
+)
+public void getAllEmployeeById(@PathVariable int id){
+...
+}
+
+This is equivalent to:
+
+@GetMapping("/{id}")
+public void getEmpById(@PathVariable int id){
+...
+}
+
+Similarly,
+
+@RequestMapping(
+    value = {"/id"}
+    method = RequestMethod.PUT
+)
+public void updateEmpById(@PathVariable int id, @RequestBody Employee employee){
+...
+}
+
+This is equivalent to:
+
+@PutMapping("/{id}")
+public void updateEmployeeById(@PathVariable int id, @RequestBody Employee employee){
+...
+}
