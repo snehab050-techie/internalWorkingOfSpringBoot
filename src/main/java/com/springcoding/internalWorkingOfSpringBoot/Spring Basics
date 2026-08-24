@@ -489,3 +489,21 @@ HTTP status codes
 ResponseEntity
 Complete request flow: Postman -> Controller -> Service -> Repository -> DB
 
+1. @RequestBody vs @ResponseBody
+-----------------------------------
+
+The easiest way:
+
+@RequestBody :
+
+HTTP request
+     to
+Java object
+
+@ResponseBody :
+
+Java object
+     to
+HTTP response
+
+So they work in opposite directions.
