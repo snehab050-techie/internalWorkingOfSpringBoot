@@ -479,3 +479,13 @@ DELETE /employees/101
 Delete emp with id 101
     |
    @DeleteMapping
+
+-------------------------------------
+Next important concepts!!!
+
+@ResponseBody vs @RequestBody
+@Controller vs @RestController
+HTTP status codes
+ResponseEntity
+Complete request flow: Postman -> Controller -> Service -> Repository -> DB
+
