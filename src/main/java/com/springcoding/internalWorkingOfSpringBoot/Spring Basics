@@ -401,3 +401,81 @@ This is equivalent to:
 public void updateEmployeeById(@PathVariable int id, @RequestBody Employee employee){
 ...
 }
+
+So:
+
+@GetMapping, @PostMapping, @PutMapping, and @DeleteMapping are specialized shortcuts for @RequestMapping.
+
+Important Notes:
+------------------
+
+- @RequestMapping is used to map HTTP requests to controller classes or methods. It can specify the URL path,
+  HTTP method, headers, parameters, and other request conditions.
+
+- @RequestMapping is a general-purpose mapping annotation that can handle different HTTP methods, whereas
+  @GetMapping specifically maps GET requests. @GetMapping is a composed shortcut for
+  @RequestMapping(method = RequestMethod.GET)
+
+- @PathVariable extracts a value from the URL path, such as /employees/101,
+  whereas @RequestParam extracts a query parameter, such as /employees/search?department=IT
+
+  @PathVariable is used when we want to identify specific data
+  @RequestParam is used in operations like searching, sorting, filtering, pagination etc.
+
+- @RequestBody tells Spring to read the HTTP request body and deserialize it into a Java object,
+  typically from JSON
+
+- We can use @PathVariable and @RequestBody together. Example: Update emp with id 101, JSON passed from body
+
+              Employee API
+
+GET /employees
+    |
+ Get all employees
+    |
+   @GetMapping
+
+
+GET /employees/101
+    |
+  @PathVariable
+    |
+Get employee with id 101
+    |
+   @GetMapping("/{id}")
+
+
+GET /employees/search?dept=IT
+    |
+   @RequestParam
+    |
+Search employees with dept IT
+    |
+   @GetMapping
+
+
+POST /employees
+    |
+   @RequestBody
+    |
+Create new employee
+    |
+   @PostMapping
+
+
+PUT /employees/101
+    |
+  @PathVariable + @RequestBody
+    |
+Update employee with id 101
+    |
+   @PutMapping
+
+
+DELETE /employees/101
+    |
+   @PathVariable
+    |
+Delete emp with id 101
+    |
+   @DeleteMapping
