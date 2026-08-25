@@ -540,3 +540,66 @@ Employee Java object
 JSON
 
 That's @ResponseBody.
+
+Note: We don't need to write @ResponseBody manually when using @RestController
+      Because @RestController is the combination of
+      @Controller + @ResponseBody
+
+@Controller vs @RestController
+-------------------------------
+
+@Controller is generally used for Spring MVC applications where controller methods can return views/HTML page,
+whereas @RestController is designed for REST APIs and combines @Controller with @ResponseBody, so the
+return value is written directly to the HTTP response body typically in JSON form.
+
+HTTP Status Code
+----------------
+
+Whenever the server responds to a client request it not only returns the data but also other important information
+like HTTP Status Codes and HTTP Status etc
+
+HTTP Status Code helps understand whether the request is success or was a failed request.
+
+Listing Important HTTP Status Code below:
+
+1. 200 - OK
+
+    Request Succeeded
+    Common for - GET, PUT operations
+
+2. 201 - CREATED
+
+    A new resource was successfully created
+    Common for - POST operation
+
+3. 204 - NO CONTENT
+
+   Request is succeeded but there is no response body
+   Common for - DELETE
+
+4. 400 - BAD REQUEST
+
+    Client sent invalid data
+
+    Example: {
+        "name": "",
+        "salary":-500
+    }
+
+5. 401 - UNAUTHORIZED
+
+    The client hasn't provided valid authenticated credentials.
+
+6. 403 - FORBIDDEN
+
+    The client is authenticated but isn't allowed to perform the operation.
+
+7. 404 - NOT FOUND
+
+    Resource doesn't exist.
+
+8. 500 - INTERNAL SERVER ERROR
+
+    Something unexpected went wrong on the server.
+
+    For example, an unhandled exception
