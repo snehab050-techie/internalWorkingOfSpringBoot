@@ -603,3 +603,20 @@ Listing Important HTTP Status Code below:
     Something unexpected went wrong on the server.
 
     For example, an unhandled exception
+
+ResponseEntity
+---------------
+
+In Spring Boot, ResponseEntity is a class provided by the Spring Framework that represents the entire
+HTTP response. By using it as the return type in out @RestController methods, we gain full control over
+configuring the HTTP status code, response headers, and response body.
+
+The Core ComponentsResponseEntity<T> uses Java generics, where T defines the data type of the response body.
+It wraps three vital parts of an HTTP response:
+
+1. Status Code: Lets us explicitly set HTTP statuses like 200 OK, 201 Created, 404 Not Found, or 500 Internal Server Error
+                instead of relying on defaults.
+2. Headers: Allows us to pass essential metadata like Content-Type, Cache-Control, or our own custom security
+            and tracking tokens.
+3. Body: Contains the actual payload being returned to the client, such as a custom Java object, a list,
+         a string, or an error details object.
