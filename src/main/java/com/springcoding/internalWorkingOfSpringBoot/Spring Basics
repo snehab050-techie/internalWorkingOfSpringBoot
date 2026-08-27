@@ -631,3 +631,24 @@ The difference between @ExceptionHandler and @ControllerAdvice
 
     @ControllerAdvice - Makes exception handling global across controllers.
 
+Handling unexpected exceptions in spring boot
+----------------------------------------------
+Suppose the database suddenly fails.
+
+We might get:
+
+NullPointerException
+SQLException
+DataAccessException
+
+We don't want our API returning ugly internal details.
+
+We have generic exception handler - @ControllerAdvice & @ExceptionHandler
+We can use these to handle the unexpected exceptions.
+
+Note: We generally use @ControllerAdvice for global exception handling and @ExceptionHandler methods to handle
+        specific exceptions. For example, if an employee isn't found, the service can throw a custom
+        EmployeeNotFoundException. The global exception handler catches it and returns a meaningful error response
+        with HTTP 404. This keeps exception-handling logic separate from the controllers and provides a consistent
+        error response across the application.
+
