@@ -620,3 +620,14 @@ It wraps three vital parts of an HTTP response:
             and tracking tokens.
 3. Body: Contains the actual payload being returned to the client, such as a custom Java object, a list,
          a string, or an error details object.
+
+
+The difference between @ExceptionHandler and @ControllerAdvice
+---------------------------------------------------------------
+
+1.  @ExceptionHandler - Handles a specific exception.
+
+    Example: @ExceptionHandler(EmployeeNotFoundException.class)
+
+    @ControllerAdvice - Makes exception handling global across controllers.
+
