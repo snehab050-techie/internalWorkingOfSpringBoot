@@ -652,3 +652,20 @@ Note: We generally use @ControllerAdvice for global exception handling and @Exce
         with HTTP 404. This keeps exception-handling logic separate from the controllers and provides a consistent
         error response across the application.
 
+Handling invalid data from client in Spring Boot
+--------------------------------------------------
+
+For example let's say the client sends invalid data:
+
+    {
+        "id":109,
+        "name":
+        "dept":"AI",
+        "salary":-5000
+    }
+
+Our application should handle this & should throw meaningful errors.
+Instead of allowing bad data into our application, we want 400 - BAD REQUEST
+
+We can implement this by using validation annotations like @NotNull , @Valid, etc directly into our Employee entity classes
+
