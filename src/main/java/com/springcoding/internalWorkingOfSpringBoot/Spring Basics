@@ -667,5 +667,12 @@ For example let's say the client sends invalid data:
 Our application should handle this & should throw meaningful errors.
 Instead of allowing bad data into our application, we want 400 - BAD REQUEST
 
-We can implement this by using validation annotations like @NotNull , @Valid, etc directly into our Employee entity classes
+We can implement this by using validation annotations like @NotBlank , @Valid, etc directly into our Employee entity classes
 
+1. @NotBlank - validates a String and ensures that it is not null, empty, or composed only of whitespace.
+
+    It rejects - "" , " " , null
+
+2.@Positive - ensures that a numeric value is strictly greater than zero
+
+3. @Valid - Tells spring to perform validations on our input client data coming from operations like POST, PUT
