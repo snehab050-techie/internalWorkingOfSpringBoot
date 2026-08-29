@@ -688,14 +688,31 @@ Ensures a String is not null, empty, or whitespace-only.
 @Positive
 Ensures a numeric value is greater than zero.
 
+@NotBlank
+@NotEmpty
+@Negative
+@Size
+@Min
+@Max
+@Email
+
 @RestControllerAdvice
 Provides global exception handling for REST controllers and writes handler results to the response body.
 
 @ExceptionHandler
 Defines how a particular exception should be handled.
 
-1. How to validate request data in Spring Boot?
-   We can use Jakarta Bean Validation annotations such as @NotBlank, @Positive, @Size, etc. on the request model,
-   and use @Valid on the @RequestBody parameter in the controller. If validation fails, Spring throws
-   MethodArgumentNotValidException. I handle this globally using @RestControllerAdvice and @ExceptionHandler and
-   return a meaningful 400 Bad Request response containing the validation errors.
+Note: How to validate request data in Spring Boot?
+        We can use Jakarta Bean Validation annotations such as @NotBlank, @Positive, @Size, etc. on the request model,
+        and use @Valid on the @RequestBody parameter in the controller. If validation fails, Spring throws
+        MethodArgumentNotValidException. I handle this globally using @RestControllerAdvice and @ExceptionHandler and
+        return a meaningful 400 Bad Request response containing the validation errors.
+
+DTO - Data Transfer Object in Spring Boot
+------------------------------------------
+
+A DTO is simply a Java class used to transfer data between different layers of an application,
+especially between the client and our API.
+
+We don't want our database structure to automatically become our API response structure.
+That's one of the major reasons we use DTOs.
