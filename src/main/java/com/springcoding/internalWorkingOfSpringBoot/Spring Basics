@@ -676,3 +676,26 @@ We can implement this by using validation annotations like @NotBlank , @Valid, e
 2.@Positive - ensures that a numeric value is strictly greater than zero
 
 3. @Valid - Tells spring to perform validations on our input client data coming from operations like POST, PUT
+
+If the validation fails the controller throws MethodArgumentNotValidException before the request reaches to service and repository
+
+@Valid
+Tells Spring to validate the incoming object against its validation constraints.
+
+@NotBlank
+Ensures a String is not null, empty, or whitespace-only.
+
+@Positive
+Ensures a numeric value is greater than zero.
+
+@RestControllerAdvice
+Provides global exception handling for REST controllers and writes handler results to the response body.
+
+@ExceptionHandler
+Defines how a particular exception should be handled.
+
+1. How to validate request data in Spring Boot?
+   We can use Jakarta Bean Validation annotations such as @NotBlank, @Positive, @Size, etc. on the request model,
+   and use @Valid on the @RequestBody parameter in the controller. If validation fails, Spring throws
+   MethodArgumentNotValidException. I handle this globally using @RestControllerAdvice and @ExceptionHandler and
+   return a meaningful 400 Bad Request response containing the validation errors.
