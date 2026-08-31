@@ -808,5 +808,48 @@ Authentication
 Authorization
 Security filters
 
+application.properties
+-----------------------
+
+application.properties is a configuration file used by Spring Boot to externalize application configuration
+such as server port, database configuration, logging settings and custom application properties.
+This allows us to change configuration without modifying the application code.
+
+We have dependencies and automatic configuration. But applications still need configuration values.
+
+For example:
+server.port=8081
+
+Where do we put it?
+Usually:
+
+src/main/resources/application.properties
+
+Example
+
+server.port=8081
+spring.application.name=employee-service
+
+Now our application runs on:
+8081
+instead of the default:
+8080
+
+Database example
+We could configure:
+
+spring.datasource.url=jdbc:mysql://localhost:3306/employees
+spring.datasource.username=root
+spring.datasource.password=password
+
+Instead of hardcoding these inside Java.
+We put it in: application.properties
+
+This gives us:
+Externalized configuration
+Easier environment changes
+Cleaner code
+No need to modify Java code for configuration changes
+
 
 
