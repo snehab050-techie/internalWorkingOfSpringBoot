@@ -716,3 +716,51 @@ especially between the client and our API.
 
 We don't want our database structure to automatically become our API response structure.
 That's one of the major reasons we use DTOs.
+
+Why use DTOs?
+--------------
+1. Separation
+
+DTO separates API models from database entities.
+
+2. Security
+
+You can prevent sensitive Entity fields from being exposed.
+
+3. Control
+
+You decide exactly what the API accepts and returns.
+
+4. Validation
+
+You can put request-specific validation on request DTOs.
+
+5. Flexibility
+
+Database structure can change without necessarily changing our API contract.
+
+"DTO stands for Data Transfer Object. In a Spring Boot REST API, we use request and response DTOs to separate the
+API contract from the database Entity. For example, in our Employee SB application EmployeeRequest contains the
+fields the client is allowed to send and can contain validation annotations, while EmployeeResponse contains the
+fields we want to expose to the client. This improves separation of concerns, prevents exposing sensitive entity
+fields, and allows the database model and API model to evolve independently."
+
+Spring Boot
+------------
+Spring Boot makes it easier to build and run Spring applications by reducing configuration and providing
+features like autoconfiguration, embedded servers, actuators, and a setup to build and run our spring application.
+
+AutoConfiguration
+-----------------
+
+Auto Configuration is a Spring Boot feature that automatically configures the application based on the dependencies
+available in the classpath and the configuration provided by the developer.
+
+It reduces the need for manual configuration. For example, when we add spring-boot-starter-web, Spring Boot
+automatically configures components required for a web application, including the embedded server and Spring MVC
+infrastructure.
+
+
+
+
+
