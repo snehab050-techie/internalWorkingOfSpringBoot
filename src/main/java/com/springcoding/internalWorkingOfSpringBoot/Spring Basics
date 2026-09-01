@@ -962,3 +962,98 @@ Ways to activate a profile
 2 - thorough command line - java -jar employee.jar --spring.profiles.active=prod
 
 In real deployments, the profile is often supplied externally rather than hardcoded.
+
+Spring Boot Actuator
+----------------------
+
+Spring Boot Actuator provides production-ready monitoring and management capabilities for Spring Boot applications.
+It exposes endpoints such as /actuator/health and /actuator/metrics, which help us monitor the application health, metrics
+and runtime information.
+
+Why do we need Actuators
+---------------------------
+Imagine our Java application is running in production.
+
+We want to know:
+Is application UP?
+How much memory is being used?
+Are my endpoints working?
+What beans are loaded?
+What metrics are available?
+
+Instead of logging into the server and investigating everything manually, Actuator exposes monitoring endpoints.
+
+Adding Actuator
+-----------------
+
+XML:
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+
+Then we can access actuator endpoints.
+
+One of the most important:
+/actuator/health
+
+For example:
+http://localhost:8080/actuator/health
+
+Response could be:
+JSON
+{
+  "status": "UP"
+}
+
+Important Actuator endpoints
+-----------------------------
+
+/actuator/health
+Tells whether application is healthy
+
+/actuator/metrics
+Provides application metrics - for example - JVM memory, CPU, HTTP requests, etc.
+
+/actuator/bean
+Shows Spring beans.
+
+/actuator/info
+Provides application information if configured.
+
+/actuator/mappings
+Shows request mappings.
+Very useful when debugging.
+
+We don't normally expose every actuator endpoint publicly.
+
+For example, exposing:
+/actuator/beans
+/actuator/env
+could reveal sensitive application information.
+
+So production applications generally restrict access to actuator endpoints.
+
+Suppose our application is deployed and users complain:
+"The application is not working."
+
+We can check:
+/actuator/health
+
+If:
+
+{
+    "status": "UP"
+}
+
+the application itself is running.
+
+If database health is included and we see something like:
+
+{
+  "status": "DOWN"
+}
+
+with a DB-related error, that gives us a strong clue that the problem may be with the database/connectivity.
+
+
