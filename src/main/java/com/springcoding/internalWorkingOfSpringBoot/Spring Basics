@@ -851,5 +851,45 @@ Easier environment changes
 Cleaner code
 No need to modify Java code for configuration changes
 
+application.yml file (YAML file)
+--------------------------------
+
+application.yml and application.properties solve the same basic problem.
+
+They are two different formats for configuration.
+
+properties -
+
+server.port=8081
+spring.application.name=employee-service
+
+spring.datasource.url = jdbc:mysql://localhost:3306/employeeDB
+spring.datasource.username = root
+spring.datasource.password = root
+spring.jpa.hibernate.ddl-auto=update
+
+yml -
+
+server:
+    port: 8081
+spring:
+    application:
+        name: employee-service
+
+spring:
+    datasource:
+        url: jdbc:mysql://localhost:3306/employeeDB
+        username: root
+        password: root
+
+    jpa:
+        hibernate:
+            ddl-auto: update
+
+YAML is often easier to read for complex configuration.
+
+Note: We can have both application.properties and application.yml file in our spring boot.
+      Both are supported configuration formats, but typically a project follows one format consistently.
+
 
 
