@@ -1056,4 +1056,37 @@ If database health is included and we see something like:
 
 with a DB-related error, that gives us a strong clue that the problem may be with the database/connectivity.
 
+Practical
+-------------
+
+Configuring the learned concepts to our project - EmployeeRestApis
+
+1. Adding dependencies in pom.xml file of EmployeeRestApis
+
+   a. spring-boot-starter-web
+   b. spring-boot-starter-actuator
+
+2. Changed server configuration in application.properties file
+    server.port = 8081
+    now application is running on port 8081 instead of default 8080
+
+    so now our request has port 8081 not 8080
+    GET http://localhost:8081/employees
+
+3. checking health using actuator endpoints
+
+    /actuator/health
+
+    Through postman:
+    GET - http://localhost:8081/actuator/health
+
+    Response:
+        {
+            "groups": [
+                "liveness",
+                "readiness"
+            ],
+            "status": "UP"
+        }
+
 
