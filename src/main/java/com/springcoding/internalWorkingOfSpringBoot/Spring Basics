@@ -1089,4 +1089,65 @@ Configuring the learned concepts to our project - EmployeeRestApis
             "status": "UP"
         }
 
+Important questions
+--------------------
 
+1. What is Spring Boot?
+Spring Boot is a framework built on top of Spring that simplifies application development by providing
+auto-configuration, starter dependencies, embedded servers and production-ready features.
+
+2. What is Auto Configuration?
+It automatically configures Spring components based on dependencies available in the classpath and application
+configuration, reducing manual configuration.
+
+3. What is @EnableAutoConfiguration?
+It tells Spring Boot to automatically configure the application based on the dependencies and environment.
+
+4. What is a Spring Boot Starter?
+A starter is a predefined group of dependencies required for a particular functionality, simplifying
+dependency management.
+
+5. Difference between Starter and Auto Configuration?
+Starter provides the required dependencies, whereas Auto Configuration configures the application based on those
+dependencies.
+
+Memory trick:
+Starter = dependencies. Auto Configuration = configuration.
+
+6. What is application.properties?
+It is a configuration file used to externalize application settings such as server port, database properties and
+logging configuration.
+
+7. Difference between .properties and .yml?
+Both are used for externalized configuration. Properties uses key-value pairs, while YAML supports a hierarchical
+structure and can be more readable for complex configurations.
+
+8. What are Spring Profiles?
+Profiles allow us to maintain environment-specific configurations such as DEV, UAT and PROD without changing
+application code.
+
+9. How do you activate a profile?
+spring.profiles.active=dev
+
+or:
+
+java -jar application.jar --spring.profiles.active=prod
+
+10. What is Spring Boot Actuator?
+Actuator provides production-ready monitoring and management features through endpoints such as
+/actuator/health and /actuator/metrics.
+
+11. What is /actuator/health?
+It provides the health status of the application and can also report the health of components such as databases
+and other configured dependencies.
+
+12. Why shouldn't all Actuator endpoints be exposed publicly?
+Because some endpoints can expose sensitive application information.
+In production, access should be restricted and secured.
+
+Spring Boot simplifies Spring application development through features like Starter dependencies, Auto Configuration,
+externalized configuration, Profiles and Actuator. Starters provide the dependencies required for a particular
+functionality, while Auto Configuration automatically configures the application based on those dependencies.
+We can keep configuration in application.properties or application.yml instead of hardcoding it. Profiles allow us
+to maintain different configurations for environments like DEV, UAT and PROD. Actuator provides production-ready
+monitoring endpoints such as health and metrics, which are useful for application monitoring and troubleshooting.
