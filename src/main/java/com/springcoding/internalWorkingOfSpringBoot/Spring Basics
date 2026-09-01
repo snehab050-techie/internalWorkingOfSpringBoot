@@ -891,5 +891,74 @@ YAML is often easier to read for complex configuration.
 Note: We can have both application.properties and application.yml file in our spring boot.
       Both are supported configuration formats, but typically a project follows one format consistently.
 
+Profiles
+---------
 
+Profiles allow us to maintain environment-specific configuration. For example, we can have separate configurations
+for DEV, UAT and PROD while keeping the application code the same. We activate the appropriate profile during deployment.
 
+Imagine our application has three environments:
+
+DEV
+UAT
+PROD
+
+Our database will be different in each environment.
+
+DEV:
+dev-db
+
+UAT:
+uat-db
+
+PROD:
+prod-db
+
+We don't want to modify Java code every time we deploy.
+That's exactly why Profiles exist.
+
+Example
+We can create:
+
+application.properties
+application-dev.properties
+application-uat.properties
+application-prod.properties
+
+application.properties has Common configuration:
+
+spring.application.name=employee-service
+
+application-dev.properties
+server.port=8081
+spring.datasource.url=jdbc:mysql://dev-db:3306/employees
+
+application-uat.properties
+server.port=8082
+spring.datasource.url=jdbc:mysql://uat-db:3306/employees
+
+application-prod.properties
+server.port=8080
+spring.datasource.url=jdbc:mysql://prod-db:3306/employees
+
+Now we activate the required profile.
+
+For example:
+spring.profiles.active=de
+
+Spring Boot loads:
+application.properties
++
+application-dev.properties
+
+Same application code.
+Different configuration.
+That's the beauty of profiles.
+
+Ways to activate a profile
+---------------------------
+
+1 - through application.properties file - spring.profiles.active = dev
+2 - thorough command line - java -jar employee.jar --spring.profiles.active=prod
+
+In real deployments, the profile is often supplied externally rather than hardcoded.
