@@ -1151,3 +1151,87 @@ functionality, while Auto Configuration automatically configures the application
 We can keep configuration in application.properties or application.yml instead of hardcoding it. Profiles allow us
 to maintain different configurations for environments like DEV, UAT and PROD. Actuator provides production-ready
 monitoring endpoints such as health and metrics, which are useful for application monitoring and troubleshooting.
+
+ORM - Object Relational Mapping
+--------------------------------
+
+ORM basically says:
+
+"I'll map your Java objects to database tables."
+
+JAVA                         DATABASE
+  |                            |
+Employee       ←→       EMPLOYEE table
+
+employee.id    ←→       ID
+employee.name  ←→       NAME
+employee.salary←→       SALARY
+
+Java understands:
+Objects
+Classes
+Fields
+
+Database understands:
+Tables
+Rows
+Columns
+
+How do we convert between them?
+That's where ORM comes in.
+
+JPA - Java Persistence API
+----------------------------
+
+JPA is NOT an implementation.
+JPA is a specification.
+
+Think of it like:
+JPA
+ |
+Rules / interfaces / standards
+ |
+"How Java applications should persist objects"
+
+It defines concepts such as:
+@Entity
+@Id
+@OneToMany
+@ManyToOne
+
+But JPA itself doesn't actually perform the database operations.
+
+Hibernate
+------------
+
+Hibernate is an implementation of JPA.
+
+             JPA
+       "Here are the rules"
+              |
+       ┌──────┴──────┐
+       |             |
+   Hibernate       Other
+   implementation  implementations
+
+In most spring boot applications:
+Spring Data JPA
+       |
+      JPA
+       |
+   Hibernate
+       |
+   JDBC
+       |
+   Database
+
+So:
+JPA = specification
+Hibernate = implementation       OR  JPA tells WHAT. Hibernate does HOW.
+
+The difference between JPA and Hibernate
+------------------------------------------
+
+JPA is a specification that defines standards for object-relational mapping and persistence in Java applications.
+Hibernate is a popular implementation of the JPA specification that actually performs the ORM and database operations.
+In a Spring Boot application, we commonly use Spring Data JPA, which internally uses Hibernate as the JPA provider.
