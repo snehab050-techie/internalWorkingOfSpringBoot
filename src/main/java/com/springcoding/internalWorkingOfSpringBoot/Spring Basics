@@ -1235,3 +1235,40 @@ The difference between JPA and Hibernate
 JPA is a specification that defines standards for object-relational mapping and persistence in Java applications.
 Hibernate is a popular implementation of the JPA specification that actually performs the ORM and database operations.
 In a Spring Boot application, we commonly use Spring Data JPA, which internally uses Hibernate as the JPA provider.
+
+JPA annotations
+-----------------
+
+1) @Entity : This class is a JPA entity and should be mapped to a database table.
+
+              @Entity is a JPA annotation used to mark a Java class as a persistent entity that can be mapped to a database table by the JPA provider.
+
+              Hibernate sees:
+
+                Employee class
+                       |
+                    @Entity
+                       |
+                "This is persistent data"
+
+            It can then map it to a database table.
+
+2) @Table : is used to specify the database table to which an entity should be mapped.
+            It is useful when the entity name and database table name are different or when we want to explicitly
+            define the table name.
+
+            For example:
+
+            Database table name - EMPLOYEE_DETAILS
+
+            Then in Java:
+                            @Entity
+                            @Table(name = "EMPLOYEE_DETAILS")
+                            public class Employee{..}
+
+3) @Id : This annotation tells Hibernate -
+         This field is the primary key of the Employee entity.
+
+         Represents primary key column in the database table
+
+
