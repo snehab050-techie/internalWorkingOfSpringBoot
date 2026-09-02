@@ -1271,4 +1271,33 @@ JPA annotations
 
          Represents primary key column in the database table
 
+4) @GeneratedValue : tells JPA that the primary key should be generated automatically rather than manually assigned by the application.
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    means the database handles ID generation using its identity/auto-increment mechanism.
+
+Complete Architecture now
+------------------------------
+
+Controller
+    |
+Service
+    |
+JpaRepository
+    |
+Spring Data JPA
+    |
+Hibernate
+    |
+JDBC
+    |
+MySql Database
+
+Steps to connect our application to database (I am using MySQL DB)
+----------------------------------------------------------
+
+Note: Our Java application is running on tomcat port 8081
+      Our Mysql Database instance is running on port 3306
+
+We will add DB port 3306 in our application.properties file via connection url
