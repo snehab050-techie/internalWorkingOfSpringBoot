@@ -1301,3 +1301,14 @@ Note: Our Java application is running on tomcat port 8081
       Our Mysql Database instance is running on port 3306
 
 We will add DB port 3306 in our application.properties file via connection url
+
+Configurations - application.properties file
+----------------------------------------
+
+spring.datasource.url=jdbc:mysql://localhost:3306/employee_db
+spring.datasource.username=root
+spring.datasource.password=OUR_Mysql_Password
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
