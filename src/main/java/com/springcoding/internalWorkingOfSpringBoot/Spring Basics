@@ -1312,3 +1312,17 @@ spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
+
+---------------------------------------------
+
+> spring.datasource.username=root
+
+This is our MySQL username.
+
+> spring.datasource.password=YOUR_MYSQL_PASSWORD
+
+Our MySQL password.
+
+> spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+This tells Java which MySQL JDBC driver to use.
