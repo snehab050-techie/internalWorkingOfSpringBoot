@@ -1326,3 +1326,22 @@ Our MySQL password.
 > spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 This tells Java which MySQL JDBC driver to use.
+
+> spring.jpa.hibernate.ddl-auto=update
+
+  basically tells Hibernate:
+  "Look at my Entity classes and update the database schema accordingly."
+
+----------------------------
+
+Create database
+
+> CREATE DATABASE DB_NAME;
+
+> SHOW DATABASES;
+
+> USE DB_NAME;
+
+> SHOW TABLES;
+
+> SELECT VERSION() : gives mysql version being used
