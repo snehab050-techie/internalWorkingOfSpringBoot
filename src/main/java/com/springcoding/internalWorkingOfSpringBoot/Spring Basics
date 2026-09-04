@@ -1345,3 +1345,15 @@ Create database
 > SHOW TABLES;
 
 > SELECT VERSION() : gives mysql version being used
+
+---------------------------------
+
+1. What is lazy loading?
+
+Answer:
+
+"Lazy loading means the associated entity is not loaded immediately when the parent entity is fetched. It is loaded only when the relationship is accessed. This can help avoid loading unnecessary data and improve performance."
+
+2: What is eager loading?
+
+"Eager loading means the associated entity is loaded immediately along with the parent entity."
