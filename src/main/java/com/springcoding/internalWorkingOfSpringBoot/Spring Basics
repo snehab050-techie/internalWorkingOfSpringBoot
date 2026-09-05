@@ -1385,9 +1385,62 @@ provides the implementation at runtime.
 automatically. We only add methods ourselves when we need custom query behavior.
 ---------------------------------
 
+Building relationships between entities
+
+1. @OneToMany
+2. @ManyToOne
+
+Example:
+
+Currently we are storing our employee dept value as a string
+But in company , the company can have many departments , so in order maintain data separately , we can have Dept table
+
+Then we can build relationship between our employee and department entity.
+
+1. Which side is the owning side in a bidirectional relationship?
+
+Example - between our Employee and Department entity class
+
+> The owning side is the side that manages the relationship and typically contains the foreign-key mapping.
+In our Employee-Department example, Employee is the owning side because it has @JoinColumn(name = "department_id"),
+while Department uses mappedBy.
+
+And the department can exists alone without the employee so its the inverse or non-owning side
+Whereas the Employee entity cannot exists without department - it needs dept data. So its the owning side
+
+2. Why do we need both annotations?
+
+We might wonder:
+"If Employee already has @ManyToOne, why do we need @OneToMany?"
+
+We don't always need a bidirectional relationship.
+We could have only:
+
+@ManyToOne
+private Department department;
+
+Then Employee can navigate to Department:
+Employee → Department
+
+But Department can't directly navigate back:
+
+Department -> Employees
+
+Adding:
+@OneToMany
+private List<Employee> employees;
+
+makes it bidirectional:
+Employee → Department
+Department → Employees
+
+Whether we actually need both directions depends on the application's use case.
+
+-------------------------------
 1. What is lazy loading?
 
 Answer:
+
 
 "Lazy loading means the associated entity is not loaded immediately when the parent entity is fetched.
 It is loaded only when the relationship is accessed. This can help avoid loading unnecessary data and improve performance."
