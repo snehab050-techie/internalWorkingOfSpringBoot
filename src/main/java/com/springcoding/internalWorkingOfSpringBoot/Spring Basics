@@ -1436,6 +1436,26 @@ Department → Employees
 
 Whether we actually need both directions depends on the application's use case.
 
+1. What is @OneToMany?
+
+   "@OneToMany defines a relationship where one entity is associated with multiple instances of another entity.
+    For example, one Department can have many Employees."
+
+2. What is @ManyToOne?
+
+   "@ManyToOne defines a relationship where multiple entities are associated with one entity.
+    For example, many Employees can belong to one Department."
+
+3. Give a real-world example.
+
+   "A Department can have many Employees, while each Employee belongs to one Department. Therefore Department has a
+    @OneToMany relationship with Employee, and Employee has a @ManyToOne relationship with Department."
+
+4. What does mappedBy do?
+
+   "mappedBy indicates that the relationship is already mapped by a field on the other entity. It identifies the
+    inverse side of a bidirectional relationship and prevents JPA from creating a separate relationship mapping.
+
 -------------------------------
 1. What is lazy loading?
 
