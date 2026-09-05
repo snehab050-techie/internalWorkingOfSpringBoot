@@ -1346,13 +1346,51 @@ Create database
 
 > SELECT VERSION() : gives mysql version being used
 
+----------------------------------------------
+
+Spring Data JPA & JpaRepository commonly used methods
+
+> JpaRepository has save(), findAll(), findById() etc. Where is their implementation?
+  Exactly! That's the magic of Spring Data JPA.
+
+> We write:
+
+  public interface EmployeeRepository
+          extends JpaRepository<Employee, Long> {
+  }
+
+  Spring Data creates the implementation for us at runtime.
+
+  So we don't write below methods by ourselves.
+
+  save()
+  findAll()
+  findById()
+  deleteById()
+  existsById()
+
+1. Why do we extend JpaRepository?
+
+> We extend JpaRepository to get ready-made CRUD operations for our entity without writing the implementation ourselves.
+It provides methods such as save, findAll, findById and deleteById, and Spring Data JPA creates the repository implementation at runtime.
+
+2. Is JpaRepository a class or interface?
+
+> JpaRepository is an interface provided by Spring Data JPA. Our repository interface extends it, and Spring Data
+provides the implementation at runtime.
+
+3. Do you need to implement JpaRepository methods?
+
+> No. For standard CRUD operations, we don't need to implement them. Spring Data JPA provides the implementation
+automatically. We only add methods ourselves when we need custom query behavior.
 ---------------------------------
 
 1. What is lazy loading?
 
 Answer:
 
-"Lazy loading means the associated entity is not loaded immediately when the parent entity is fetched. It is loaded only when the relationship is accessed. This can help avoid loading unnecessary data and improve performance."
+"Lazy loading means the associated entity is not loaded immediately when the parent entity is fetched.
+It is loaded only when the relationship is accessed. This can help avoid loading unnecessary data and improve performance."
 
 2: What is eager loading?
 
