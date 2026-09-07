@@ -1477,6 +1477,62 @@ And:
 @JoinColumn(name = "department_id")
 private Department department;
 
+@OneToMany(mappedBy = "department")
+private List<Employee> employees;
+
+----------------------------------------
+
+Creating departments through DepartmentController:
+
+POST: http://localhost:8081/departments
+
+{
+    "deptName": "IT"
+}
+
+Error 1:
+        {
+        "status": 500,
+        "message": "JSON parse error: Cannot map `null` into type `int` (set `DeserializationFeature.FAIL_ON_NULL_FOR_PRIMITIVES` to 'false' to allow)",
+        }
+
+        This error happens because your backend application (likely Spring Boot with Jackson) is receiving a null value
+        for a field that you defined as a primitive int in your Java code. Primitive int variables cannot hold null
+        values; they require an actual number.
+
+        Fix : Change int to Integer (Recommended) : The best practice is to change the data type from the primitive
+        int to the object wrapper Integer in your Java DTO (Data Transfer Object) or Entity class. Integer can safely
+        hold null values.
+
+Error 2: Not an actual error , nut DB was generating id from 3 instead of 1
+        The reason our database is starting at 3 instead of 1 is usually because the primary key sequence or
+        auto-increment counter was advanced during our previous failed insertion attempts or due to pre-allocation
+        (caching) by the database engine.To reset the generator so the next ID created is 1, we need to run a
+        command directly in our database.
+
+        MySQL :
+        ALTER TABLE departments AUTO_INCREMENT = 1;
+
+        Now IDs are generating from 1,instead of 3 (example)
+
+Postman Request: Example
+
+POST: http://localhost:8081/departments
+
+Input: JSON
+
+{
+    "deptName": "IT"
+}
+
+Output: 201 CREATED
+
+{
+    "id": 1,
+    "deptName": "IT",
+    "employees": null
+}
+
 -------------------------------
 1. What is lazy loading?
 
