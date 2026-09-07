@@ -1533,6 +1533,14 @@ Output: 201 CREATED
     "employees": null
 }
 
+---------------------------
+Validation annotations imp:
+
+@NotBlank: Use only for String fields. It ensures the text isn't null, empty "", or just blank spaces "   ".
+
+@NotNull: Use for any Object type (Integer, Double, custom objects, etc.). It ensures the value isn't null.
+
+@Min / @Max: Use for numeric fields if we also want to ensure the ID is a positive number (e.g., @Min(1)).
 -------------------------------
 1. What is lazy loading?
 
