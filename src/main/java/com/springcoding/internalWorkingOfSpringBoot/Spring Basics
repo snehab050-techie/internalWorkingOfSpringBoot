@@ -1694,3 +1694,227 @@ DELETE Employees
 If:
 cascade = CascadeType.ALL
 then multiple operations propagate.
+
+Imp REST API concepts
+------------------------
+
+1. GET - Retrieve data
+
+GET is used to retrieve data from the server. It should not modify the server's state.
+
+Used to fetch/read data.
+
+Example:
+
+GET /employees/1
+
+Means:
+"Give me employee whose ID is 1."
+
+Spring Boot:
+
+@GetMapping("/{id}")
+public EmployeeResponse getEmployee(@PathVariable Long id) {
+    return employeeService.getEmployee(id);
+}
+
+Example:
+
+GET /employees
+GET /employees/10
+
+2. POST - Create new resource
+
+POST is generally used to create a new resource on the server.
+
+Used to create something new.
+
+POST /employees
+
+Request:
+JSON:
+{
+       "name": "Sneha",
+       "salary": 70000,
+       "departmentId": 1
+}
+
+Example:
+
+POST /employees
+
+creates a new employee.
+
+Usually returns:
+201 Created
+
+3. PUT - Update the resource
+
+PUT is generally used to completely replace or update an existing resource.
+
+   Example:
+
+   PUT /employees/1
+   {
+       "name": "Sneha",
+       "salary": 80000,
+       "departmentId": 2
+   }
+
+4. DELETE - Delete resource
+
+DELETE is used to remove a resource from the server.
+
+DELETE /employees/1
+
+Means:
+
+Delete employee 1.
+
+Spring:
+
+@DeleteMapping("/{id}")
+public void deleteEmployee(@PathVariable Long id) {
+    employeeService.deleteEmployee(id);
+}
+
+5. PATCH
+
+PATCH is used for a partial update.
+
+Imagine employee 1 is:
+
+   {
+       "id": 1,
+       "name": "Sneha",
+       "salary": 70000,
+       "departmentId": 1
+   }
+
+Suppose we only want to change the salary.
+
+   With PATCH:
+
+   PATCH /employees/1
+
+   Request:
+
+   {
+       "salary": 80000
+   }
+
+   We don't need to send entire object
+
+   {
+       "name": "Sneha",
+       "salary": 80000,
+       "departmentId": 1
+   }
+
+   Only the field we want to change.
+
+   Simple way to remember
+
+   PUT = replace/update the whole resource
+   PATCH = update only part of the resource
+
+Http Status Codes
+------------------
+
+These are responses from the server telling the client what happened.
+
+200 - OK : means the request was successfully processed.
+
+Example: GET employees/1
+         Employee found
+         200 OK
+
+201 - CREATED : A new resource was successfully created
+
+Example: POST /employees
+         201 Created
+
+400 - Bad Request : means the server cannot process the request because the client sent invalid or malformed data.
+
+Example:
+{
+    "name": "",
+    "salary": "abc"
+}
+or malformed JSON
+
+401 - Unauthorized : Authentication is required or authentication failed.
+
+Example:
+
+Client -> API
+Server -> "Who are you?"
+
+Because authentication/token is missing or invalid.
+
+403 - Forbidden : The user is authenticated, but doesn't have permission to perform the operation.
+
+Example:
+User successfully logged in
+        ↓
+Tries to access Admin API
+        ↓
+No ADMIN role
+        ↓
+403 Forbidden
+
+403 -> Authorization/permission problem
+
+401 vs 403
+
+401 = I don't know who you are.
+403 = I know who you are, but you're not allowed to do this.
+
+404 - Not Found : The requested resource doesn't exist.
+
+404 means the requested resource could not be found on the server.
+
+Example:
+
+GET /employees/9999
+
+If employee 9999 doesn't exist:
+404 Not Found
+
+500 - Internal Server Error : means an unexpected error occurred on the server while processing the request.
+
+Something unexpected went wrong on the server side.
+
+For example:
+
+NullPointerException
+Database failure
+Unexpected application exception
+
+Example:
+
+Client:
+GET /employees/1
+
+Server crashes while processing it.
+
+Response:
+500 Internal Server Error
+
+------------------------------------------
+
+200 -> Successfully processed
+201 -> Successfully created
+
+400 -> Bad request
+401 -> Not authenticated
+403 -> Not allowed
+404 -> Resource not found
+
+500 -> Server-side error
+
+----------------------------------------
+
+Important questions
+
+1. What is REST?
