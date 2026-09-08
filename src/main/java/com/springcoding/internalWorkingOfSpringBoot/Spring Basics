@@ -1542,14 +1542,49 @@ Validation annotations imp:
 
 @Min / @Max: Use for numeric fields if we also want to ensure the ID is a positive number (e.g., @Min(1)).
 -------------------------------
-1. What is lazy loading?
 
-Answer:
+Important questions:
 
+1. What is FetchType?
+   FetchType defines how an associated entity or collection should be fetched by JPA.
+   The two main strategies are LAZY and EAGER. LAZY defers loading until the association is accessed,
+   while EAGER indicates that the association should be fetched immediately.
 
-"Lazy loading means the associated entity is not loaded immediately when the parent entity is fetched.
-It is loaded only when the relationship is accessed. This can help avoid loading unnecessary data and improve performance."
+2. What is the default FetchType of @ManyToOne?
+   EAGER.
 
-2: What is eager loading?
+3. What is the default FetchType of @OneToMany?
+   LAZY.
 
-"Eager loading means the associated entity is loaded immediately along with the parent entity."
+4. Is LAZY always better than EAGER?
+   No. It depends on the use case. LAZY is generally preferred when the relationship isn't always required because
+   it avoids unnecessary loading, but if associated data is consistently required, an appropriate eager/fetch
+   strategy may be useful.
+
+5. What is LazyInitializationException?
+   It occurs when a lazy relationship is accessed after the Hibernate persistence context has been closed,
+   so Hibernate can no longer initialize the association.
+
+6. What is N+1? Query problem
+   N+1 occurs when one query retrieves N entities and then accessing an associated relationship causes an
+   additional query for each entity, resulting in one initial query plus N additional queries.
+
+7. How would you troubleshoot N+1 in production?
+   I would first check the application logs or Hibernate SQL logs to identify repeated queries.
+   If I see one query fetching the main entities followed by repeated queries for the same association,
+   I would suspect N+1. Then I would review the entity fetch strategy and repository queries and consider
+   solutions such as JOIN FETCH, EntityGraph, or batch fetching depending on the use case.
+
+8. Can you explain N+1 problem with an example?
+   "Suppose I fetch a list of 100 Employees using one query. If the Employee-to-Department relationship is lazily
+   loaded and my code accesses the Department for each Employee, Hibernate may execute another query for each Employee.
+   So instead of one query, we could end up with 1 + 100 queries, which is the N+1 problem. This can cause significant
+   database and performance overhead."
+
+9. What is lazy loading?
+    Lazy loading means the associated entity is not loaded immediately when the parent entity is fetched.
+    It is loaded only when the relationship is accessed. This can help avoid loading unnecessary data and improve
+    performance.
+
+10. What is eager loading?
+    Eager loading means the associated entity is loaded immediately along with the parent entity.
