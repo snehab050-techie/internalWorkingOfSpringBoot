@@ -1588,3 +1588,109 @@ Important questions:
 
 10. What is eager loading?
     Eager loading means the associated entity is loaded immediately along with the parent entity.
+
+CascadeType in JPA/Hibernate
+-----------------------------
+
+Cascade tells Hibernate: "When I perform an operation on this entity, should the same operation automatically be
+                          applied to its related entities?"
+
+Example:
+
+Department = IT
+Employees = Sneha, Rahul, Priya
+
+Now imagine we want to save the Department and its employees.
+
+Without cascade, we may have to explicitly save each thing:
+
+ departmentRepository.save(department);
+
+ employeeRepository.save(employee1);
+ employeeRepository.save(employee2);
+ employeeRepository.save(employee3);
+
+ That's repetitive.
+
+ With cascade, we can tell Hibernate:
+ "If I save this Department, automatically save the related Employees too."
+
+Then:
+departmentRepository.save(department);
+can cause the associated employees to be persisted as well.
+That's the basic purpose of Cascade.
+
+Without cascade, developers would have to manually manage operations on related entities.
+
+The problem it solves:
+Manual management of related entity operations.
+
+CascadeType.ALL means:
+Apply all cascade operations.
+
+The important cascade types are:
+---------------------------------
+PERSIST
+MERGE
+REMOVE
+REFRESH
+DETACH
+ALL
+
+1. What is CascadeType in JPA?
+    CascadeType defines which operations performed on one entity should automatically be propagated to its associated
+    entities.
+
+2. Why do we use cascade?
+   It avoids manually performing the same persistence operations on related entities. Hibernate can automatically
+   propagate selected operations from one entity to its associated entities.
+
+3. What is CascadeType.ALL?
+   CascadeType.ALL enables all cascade operations, including PERSIST, MERGE, REMOVE, REFRESH and DETACH.
+
+4. Difference between CascadeType.PERSIST and CascadeType.REMOVE?
+   PERSIST propagates saving/persisting a new entity to its related entities, while REMOVE propagates deletion.
+
+5. Is Cascade the same as FetchType?
+   No.
+   FetchType controls when associated data is loaded, whereas CascadeType controls which entity operations are
+   propagated to associated entities.
+
+6. Is CascadeType.ALL always recommended?
+   No. It depends on the relationship and business requirement. In particular, CascadeType.REMOVE can be dangerous
+   if deleting the parent should not delete the associated children.
+
+7. Give a real-world example of cascade.
+   For example, if an Order owns its OrderItems, we might use cascade persist so that saving a new Order
+   automatically persists its new OrderItems. But we should carefully consider whether deleting the Order should
+   also delete the OrderItems before enabling remove cascade.
+
+Complete Mental Model
+------------------------
+
+Keep this in your head:
+
+             Department
+                 │ to
+                 │  (Cascade)
+             Employees
+
+If:
+cascade = CascadeType.PERSIST
+
+then:
+SAVE Department
+       ↓
+SAVE Employees
+
+If:
+cascade = CascadeType.REMOVE
+
+then:
+DELETE Department
+       ↓
+DELETE Employees
+
+If:
+cascade = CascadeType.ALL
+then multiple operations propagate.
