@@ -1918,3 +1918,52 @@ Response:
 Important questions
 
 1. What is REST?
+
+REST is an architectural style for designing web APIs where resources are exposed through URLs and HTTP methods
+are used to perform operations on those resources.
+
+2. What are common HTTP methods?
+
+GET, POST, PUT, PATCH and DELETE.
+
+GET     -> Read
+POST    -> Create
+PUT     -> Complete update/replacement
+PATCH   -> Partial update
+DELETE  -> Delete
+
+3. PUT vs PATCH?
+
+   PUT is generally used for complete replacement/update of a resource, whereas PATCH is used for partial updates.
+
+4. POST vs PUT?
+
+   POST is generally used to create a new resource, while PUT is generally used to update or replace an existing
+   resource.
+
+5. Is GET supposed to modify data?
+
+   No. GET should be safe and used for retrieving data, not modifying server state.
+
+6. What is the difference between 401 and 403?
+
+   401 means authentication is missing or failed. 403 means the user is authenticated but does not have sufficient
+   permission.
+
+7. 200 vs 201?
+
+   200 means the request was successfully processed, while 201 specifically indicates that a new resource was created.
+
+8. 400 vs 500?
+
+   400 usually indicates an invalid client request, while 500 indicates an unexpected server-side error.
+
+9. When would you return 404?
+
+   When the requested resource doesn't exist.
+
+   For example:
+
+   GET /employees/100
+
+   when employee 100 doesn't exist.
