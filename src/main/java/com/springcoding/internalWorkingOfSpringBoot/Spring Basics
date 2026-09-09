@@ -2047,3 +2047,38 @@ EmployeeRepository interface
 
 -----------------------------------
 
+DAO vs Repository
+
+A useful way to remember it:
+
+1. Traditional approach
+
+Controller
+     ↓
+Service
+     ↓
+DAO
+     ↓
+EntityManager/JDBC
+     ↓
+Database
+
+2. Modern Spring Boot + JPA
+
+   Controller
+        ↓
+   Service
+        ↓
+   Repository
+        ↓
+   JPA/Hibernate
+        ↓
+   Database
+
+   So if our Employee project uses:
+   JpaRepository<Employee, Long>
+
+   We can think:
+
+   EmployeeRepository is the modern Spring Data JPA way of providing the data-access functionality that a DAO
+   traditionally handled.
