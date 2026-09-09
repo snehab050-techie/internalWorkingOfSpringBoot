@@ -1967,3 +1967,55 @@ DELETE  -> Delete
    GET /employees/100
 
    when employee 100 doesn't exist.
+
+----------------------------
+
+Traditional DAO classes
+
+DAO - Data Access Object
+
+DAO is the layer/class responsible for communicating with the database.
+
+Its job is to perform database-related operations such as:
+
+Save employee
+Find employee
+Update employee
+Delete employee
+Find employees based on some condition
+
+For example:
+
+GET /employees/101
+        ↓
+EmployeeController
+        ↓
+EmployeeService
+        ↓
+EmployeeDAO
+        ↓
+Database
+
+------------------------------------------
+
+We separate database logic:
+
+Controller
+   ↓
+handles HTTP
+
+Service
+   ↓
+handles business logic
+
+DAO
+   ↓
+handles database
+
+Database
+
+Each layer has a specific responsibility.
+
+This is called Separation of Concerns.
+
+-----------------------------------------
