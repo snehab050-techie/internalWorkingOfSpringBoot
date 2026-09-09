@@ -2140,3 +2140,13 @@ Our complete Employee REST API architecture
                 CLIENT
 
 -----------------------------------
+
+Q1. What is DAO?
+
+DAO stands for Data Access Object. It is a design pattern used to separate database access logic from the rest of the
+application. It provides methods for operations such as fetching, saving, updating and deleting data.
+
+Q2. Why do we need DAO?
+
+DAO separates persistence logic from business logic. This improves separation of concerns, maintainability,
+testability and makes the application easier to change if the data-access mechanism changes.
