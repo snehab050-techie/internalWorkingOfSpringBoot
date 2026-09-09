@@ -2019,3 +2019,31 @@ Each layer has a specific responsibility.
 This is called Separation of Concerns.
 
 -----------------------------------------
+
+Repository often plays the role of DAO.
+
+For example:
+
+@Repository
+public interface EmployeeRepository
+        extends JpaRepository<Employee, Long> {
+}
+
+Now we can do:
+
+employeeRepository.findById(id);
+employeeRepository.save(employee);
+employeeRepository.delete(employee);
+
+Spring Data JPA provides the implementation for us.
+
+So instead of manually writing:
+
+EmployeeDAO class
+
+we commonly use:
+
+EmployeeRepository interface
+
+-----------------------------------
+
