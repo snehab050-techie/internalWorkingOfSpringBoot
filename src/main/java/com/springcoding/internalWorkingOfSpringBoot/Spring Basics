@@ -2082,3 +2082,61 @@ Database
 
    EmployeeRepository is the modern Spring Data JPA way of providing the data-access functionality that a DAO
    traditionally handled.
+
+-------------------------------
+
+DAO vs DTO
+
+DAO : Data Access Object
+
+Purpose:
+Access the database.
+
+DTO : Data Transfer Object
+
+Purpose:
+Transfer data between layers/systems.
+
+DAO is used to access and manipulate data in the database, whereas DTO is used to transfer data between
+different layers or systems without exposing the underlying entity directly.
+
+--------------------------
+
+Our complete Employee REST API architecture
+
+                    CLIENT
+                      │
+                      │ HTTP Request
+                      ▼
+              EmployeeController
+                      │
+                      ▼
+               EmployeeService
+                      │
+                      ▼
+             EmployeeRepository
+                 (DAO role)
+                      │
+                      ▼
+                JPA / Hibernate
+                      │
+                      ▼
+                   DATABASE
+
+ And on the way back
+
+                DATABASE
+                   ↓
+                Entity
+                   ↓
+                Service
+                   ↓
+                DTO
+                   ↓
+                Controller
+                   ↓
+                JSON Response
+                   ↓
+                CLIENT
+
+-----------------------------------
