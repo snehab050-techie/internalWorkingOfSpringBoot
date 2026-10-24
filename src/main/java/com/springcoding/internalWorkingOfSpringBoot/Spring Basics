@@ -1,3 +1,17 @@
+The difference between Spring and SpringBoot
+----------------------------------------------
+Spring is a Java framework that provides features such as dependency injection, IoC, Spring MVC,
+transaction management, security, and data access. However, traditional Spring applications can
+require a significant amount of configuration. Spring Boot is built on top of the Spring Framework
+and simplifies application development by providing auto-configuration, starter dependencies,
+embedded servers, and production-ready features such as Actuator. So Spring provides the core framework
+capabilities, while Spring Boot reduces the configuration and setup required to build and run Spring applications.
+
+------------------------------
+@SpringBootApplication : combines @SpringBootConfiguration, @EnableAutoConfiguration, and @ComponentScan
+
+1. @ComponentScan -
+
 Dependency Injection
 ----------------------
 Dependency Injection (DI) in Spring is a design pattern where an external container manages and provides
