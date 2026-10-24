@@ -10,7 +10,42 @@ capabilities, while Spring Boot reduces the configuration and setup required to 
 ------------------------------
 @SpringBootApplication : combines @SpringBootConfiguration, @EnableAutoConfiguration, and @ComponentScan
 
-1. @ComponentScan -
+@SpringBootApplication is the main configuration annotation in a Spring Boot application.
+It is a combination of @SpringBootConfiguration, @EnableAutoConfiguration, and @ComponentScan.
+
+@SpringBootConfiguration identifies the application configuration class,
+@EnableAutoConfiguration enables Spring Boot's automatic configuration based on the dependencies available in the classpath,
+and @ComponentScan scans for Spring components in the application's package and its sub-packages.
+
+So when your application starts:
+SpringApplication.run(EmployeeApplication.class, args);
+
+Spring Boot essentially:
+Starts application
+       ↓
+Creates Spring ApplicationContext
+       ↓
+Performs component scanning
+       ↓
+Finds @Controller, @Service, @Repository, etc.
+       ↓
+Performs auto-configuration
+       ↓
+Creates required beans
+       ↓
+Application is ready
+
+-----------------------
+
+@SpringBootApplication - Main Spring Boot configuration annotation
+@SpringBootConfiguration - Identifies Boot configuration class
+@EnableAutoConfiguration - Automatically configures based on classpath/dependencies
+@ComponentScan - Finds Spring components and registers them as beans
+@Configuration - Indicates a configuration class
+
+-----------------------
+
+
 
 Dependency Injection
 ----------------------
